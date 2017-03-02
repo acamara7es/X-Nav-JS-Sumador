@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="utf-8">
+	<title>Ejercicio 5.5.6. Sumador JS números aleatorios</title>
+	<link rel="stylesheet" type="text/css" href="style_ext.css" />
+	<script type="text/javascript" charset="utf-8">
+		var contador = 1;
+
+		function cambiador(id, newValue) {
+			var elem = document.getElementById(id);
+			elem.innerHTML = newValue;
+		}
+
+		function getElementByIdAndClass(id, cls) {
+			var elem = document.getElementById(id);
+			return elem.getElementsByClassName(cls)[0];
+		}
+
+		function calcular(id) {
+			var string_op = getElementByIdAndClass(id, "suma");
+			var array_suma = string_op.innerHTML.split("+");
+			var res = parseInt(array_suma[0]) + parseInt(array_suma[1]);
+			var res_html = getElementByIdAndClass(id, "result");
+			res_html.innerHTML = " = " + res;
+			getElementByIdAndClass(id, "link").className = "hidden";
+		}
+
+		function generador(str_op) {
+			var op1 = Math.floor(Math.random() * 100);
+			var op2 = Math.floor(Math.random() * 100);
+			str_op.innerHTML = op1 + "+" + op2;
+			return [op1, op2];
+		}
+
+		function rellenar(cont, sum_element) {
+			sum_element.innerHTML = sum_element.innerHTML +
+				"<p class='generated' id=" + cont + ">" +
+				"<span class='title'>Operación " + cont + ": </span>" +
+				"<span class='suma'></span><span class='result'></span> " +
+				'<a href="javascript:calcular(' + cont + ")" +
+				'"class="link">Calcular</a></p>';
+		}
+
+		function nueva_suma(id) {
+			var sum_element = document.getElementById(id);
+			contador++;
+			rellenar(contador, sum_element);
+			generador(getElementByIdAndClass(contador, "suma"));
+		}
+
+		function reset() {
+			var operations = document.getElementsByClassName("generated");
+			while (operations.length > 0) {
+				operations[0].remove();
+			}
+			getElementByIdAndClass("origin", "result").innerHTML = "";
+			getElementByIdAndClass("origin", "hidden").className = "link";
+			contador = 1;
+		}
+	</script>
+</head>
+
+<body>
+	<p>
+		<a href="javascript:nueva_suma('sumas')">Nueva Suma</a>
+		<a href="javascript:reset()">Reset</a>
+	</p>
+	<div id="sumas">
+		<p id="origin">
+			<span class="title">Operación 1:</span>
+			<span class="suma">5+3</span>
+			<span class="result"></span>
+			<a href="javascript:calcular('origin')" class='link'>Calcular</a>
+		</p>
+	</div>
+</body>
+
+</html>

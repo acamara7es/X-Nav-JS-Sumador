@@ -1,0 +1,12 @@
+#add {
+    font-weight: bold;
+}
+#res {
+    font-size: 130%;
+}
+.visible{
+    visibility:visible;
+}
+.invisible{
+    visibility:hidden;
+}

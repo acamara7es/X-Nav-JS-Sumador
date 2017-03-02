@@ -1,0 +1,12 @@
+.title {
+    font-weight: bold;
+}
+.result {
+    font-size: 130%;
+}
+.hidden {
+    visibility: hidden;
+}
+.link {
+    visibility: visible;
+}
